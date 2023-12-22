@@ -1,4 +1,5 @@
 #include "Interpreter.hpp"
+#include "Instructions.hpp"
 #include <fstream>
 
 Interpreter::Interpreter() {
@@ -90,6 +91,13 @@ void Interpreter::Interpret() {
 					std::cout.flush();
 				}
 				break;
+			case Instructions::ByteIn:
+				{
+					char byteInput;
+					std::cin >> byteInput;
+					std::cin.clear();
+					m_memory[m_ptr] = static_cast<uint8_t>(byteInput);
+				}
 			case Instructions::JmpFwd:
 				if (m_memory[m_ptr] == 0)
 					m_pc = m_jumpMap[m_pc];
